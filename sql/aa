@@ -1,0 +1,1 @@
+/usr/pgsql-9.5/bin/pg_upgrade -j 4 -d /data.old/dbdata -D /data/dbdata -b /usr/pgsql-9.1/bin/ -B /usr/pgsql-9.5/bin/ &

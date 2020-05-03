@@ -1,0 +1,62 @@
+#!/usr/bin/perl
+use strict;
+
+#--- Location of system binaries
+$main::SYSBIN='/bin';
+$main::SYSBIN2='/usr/bin';
+$main::PGBIN='/usr/bin';
+
+#--- Account involved
+$main::ACCOUNT=getpwuid($<);
+
+#--- E-mail addresses of DBA team to receive system messages from
+#--- assorted jobs
+$main::ADMINISTRATOR='example@sfu.ca';
+
+#--- E-mail address of primary DBA to receive warning messages
+$main::SUPERADMINISTRATOR='example@sfu.ca';
+
+#--- E-mail address of main instance account
+$main::ADMINADDR='example@sfu.ca';
+
+#--- Main instance info
+$main::HOMEDIR='/var/lib/pgsql';
+$main::BASEDIR='/usr';
+$main::SCRIPT_MAIN='/var/lib/pgsql/maint';
+
+#--- Standard permissions
+$main::NOPERMIT='u=rwx,go=';
+$main::FULLPERMIT='u=rwx,go=rx';
+
+#--- Commands to get the name of the database server in upper case
+$main::SERVERNAME=`${main::SYSBIN}/hostname`;
+$main::SERVERNAME=uc($main::SERVERNAME);
+$main::SERVERNAME=~s/\n//g;
+$main::MACHINE=$main::SERVERNAME;
+my $machine=lc($main::MACHINE);
+
+#--- Location of configuration files used by scripts
+$main::SCRIPT_CONF=$main::SCRIPT_MAIN.'/conf';
+
+#--- Location of temporary files used by scripts
+$main::SCRIPT_TEMP=$main::SCRIPT_MAIN.'/temp';
+
+#--- Location of error output logs for cron jobs
+$main::CRON_LOG=$main::SCRIPT_MAIN.'/cronlog';
+
+#--- Location of general logs for scripts
+$main::SCRIPT_LOG=$main::SCRIPT_MAIN.'/logmaint';
+
+#--- Main database directory for this instance
+$main::DBDATADIR='/data/dbdata';
+
+#--- Database transaction log directory for this instance
+$main::DBLOGSDIR='/data/dbdata/pg_xlog';
+
+#--- Database error/warning log
+$main::DBERRORDIR='/data/dbdata/pg_log';
+
+#--- Directory of backups exposed to nightly system tape backup
+$main::DBBACKUPDIRMAIN='/dbbackup';
+
+1;

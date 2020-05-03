@@ -1,0 +1,12 @@
+#-- Tandem to check if postgres server is up
+05,25,45 * * * * /var/lib/pgsql/maint/up.pl
+06,26,46 * * * * /var/lib/pgsql/maint/upcheck.pl 10
+
+#-- Send email to show cron jobs running/server up
+#00 03,15 * * * /var/lib/pgsql/maint/emailtester.pl
+
+#-- Check logs for new messages
+14,29,44,59 * * * * /var/lib/pgsql/maint/batchjob/15min.sh
+
+#-- Full backup
+00 1 * * * /var/lib/pgsql/maint/batchjob/nightly.sh
